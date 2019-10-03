@@ -1,0 +1,68 @@
+/*display parameters */
+
+xmul		1
+outmul		10
+potmul		5
+delta		20
+
+stimululus	0
+receptors	0
+potential	0
+output		1
+spikes		1
+pot+spikes	1
+
+mitralpot	1
+mitralout	1
+mitralfft	1
+vumpot		1
+vumout		1
+granulepot	1
+granuleout	1
+granulefft	1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

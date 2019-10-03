@@ -1,0 +1,52 @@
+glom	100
+rec	100
+mol	100
+
+ni	0
+ne	0
+np	1
+nv	1
+
+NX 	10
+NY	10
+
+
+
+afferent:
+
+r_i	0.0 1
+r_e	0.0 1
+r_p	5.0 1
+
+local:
+
+i_e	0.0 1
+i_i	0.0 3
+e_i	0.0 5
+e_e	0.0 1
+i_p	0.0 1
+e_p	0.0 1
+
+lateral:
+
+i_e	0.0 1 5 0
+i_i	0.0 1 5 0
+i_p	0.0 1 5 1
+
+Vum
+
+i_v 	0.0 1
+e_v 	0.0 1
+p_v 	0.1 1
+v_i 	0.0 1
+v_e 	0.0 1
+v_p 	0.0 1
+
+HomoLN
+
+r_h	0.4 1
+i_h	0.0 1
+h_i	0.0 1
+h_p	0.6 1
+h_h	4.0 3
+

@@ -1,0 +1,40 @@
+
+/**************************************************/
+/* includes all library function definitions ******/
+/* and types and booloeans ************************/
+/**************************************************/
+
+/** input functions take no parameters **/
+
+extern float 		SUM_INPUTS (); 
+extern float		ELECTRICAL ();
+extern float		MIXED_INPUTS ();  
+extern float		GET_MOLECULES ();
+extern float 		PROJ_INPUTS ();
+extern float 		SAT_INPUTS ();
+extern float 		MIXED_SATS ();
+extern float 		GET_INPUTS ();
+extern float 		ADAPT_INPUT ();
+extern float 		ADAPT_ELECTRICAL ();
+extern float 		GUST_INPUT ();
+extern float 		LOOK_UP ();
+extern float 		ELECTRICAL_IN ();
+extern float 		ADAPT_AON ();
+/** state functions take 1 parameter **/
+
+extern float		LINEAR (); 
+extern float		SAT ();
+extern float		SIG ();
+extern float		DECAY (); 
+extern float		FALSE_DECAY ();
+extern float		FIRST_ORDER_STATE (); 
+extern float 		POT_REC ();
+
+/** output functions take 2 parameters **/
+  
+extern float		ADAPT_SPIKE ();
+extern float		SPIKE (); 
+extern float		THRESHOLD ();
+extern float		FALSE_SPIKE ();
+extern float 		FALSE_SIG ();
+extern float 		VUM_OUT ();

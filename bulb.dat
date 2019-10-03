@@ -1,0 +1,141 @@
+/*contains parameters to construct a OB-PC network*/
+
+BULB
+
+MOLS		100
+RECS		100
+GLOMS		100
+neurs		1
+
+RECEPTORS:
+
+input_function	GET_MOLECULES
+in_par1		0.0
+in_par2		0.0
+
+state_function	LINEAR
+sta_par		0.0
+
+output_function	SPIKE
+out_par1	-0.01
+out_par2	1.0
+
+PG:
+
+input_function	SUM_INPUTS
+in_par1		0.0
+in_par2		0.0
+
+state_function	DECAY
+sta_par		2
+
+output_function	SPIKE
+out_par1	0.2
+out_par2	4.0
+
+ET
+input_function	SUM_INPUTS
+in_par1		-0.0
+in_par2		0.0
+
+state_function	DECAY
+sta_par		8
+
+output_function	SPIKE
+out_par1	1.0
+out_par2	4.0
+
+MITRAL
+
+input_function	SUM_INPUTS
+in_par1		-0.0
+in_par2		0.0
+
+state_function	DECAY
+sta_par		8
+
+output_function	SPIKE
+out_par1	-0.1
+out_par2	8.0
+
+GRANULE:
+
+input_function	SUM_INPUTS
+in_par1		-0.0
+in_par2		0.0
+
+state_function	DECAY
+sta_par		4
+
+output_function	SPIKE
+out_par1	2.0
+out_par2	4.0
+
+
+PYR:
+
+input_function	ADAPT_INPUT
+in_par1		100.0
+in_par2		0.2
+
+state_function	DECAY
+sta_par		10
+
+output_function	SPIKE
+out_par1	0.5
+out_par2	6.0
+
+AFFERENTS(w/d/N/A): 
+
+R_M	0.0 1 0.0  1.0
+R_PG	0.0 1 0.0  1.0
+R_ET	0.02 1 0.0  1.0
+
+LOCAL(w/d/N/A/A/B):
+
+M_PG	0.0 1	0.0 1.0 
+PG_M	0.0 1	1.0 0.0
+ET_PG 0.0 1   0.0 1.0
+ET_M	0.0 1   0.0 1.0
+PG_ET  0.1 1   1.0 0.0
+
+BULB(w/d/prob/N/A):
+
+M_G	1.0 1 0.2 0.0 1.0
+G_M	0.0 1 0.0 0.98 0.02 
+G_G	0.1 1 1.0 1.0 0.0
+
+CENTRAL(w/d/prob/N/A):
+
+M_P	0.5 1 0.2 0.0 1.0
+P_M	0.0 1 0.1 0.0 1.0
+P_G	0.0 1 0.2 0.0 1.0
+P_E 	0.0 1 0.2 0.0 1.0 
+P_P	0.0 1 0.25 0.0 1.0
+
+max1 	1.0
+max2	1.0
+
+RATEASS 	0.000 
+RATEMCGC 	0.001
+RATEPCGC	0.01
+
+FORGETASS 0
+FORGETMCGC 10
+FORGETPCGC 4500
+
+OXT 	1.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+

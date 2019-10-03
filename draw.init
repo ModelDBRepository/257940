@@ -1,0 +1,36 @@
+/*definitions and types needed for graphic functions */
+
+typedef struct 	{
+		int	from;
+		int	too;
+		} WIND;
+
+
+enum BOOLEAN ALL;
+enum BOOLEAN D_RECS;
+enum BOOLEAN D_STIM;
+enum BOOLEAN D_OUT;
+enum BOOLEAN D_POT;
+enum BOOLEAN D_SPIKES;
+enum BOOLEAN D_ACT;
+enum BOOLEAN D_GOUT;
+enum BOOLEAN D_GPOT;
+enum BOOLEAN D_MOUT;
+enum BOOLEAN D_MPOT;
+enum BOOLEAN D_FFTG;
+enum BOOLEAN D_FFTM;
+enum BOOLEAN D_VPOT;
+enum BOOLEAN D_VOUT;
+
+
+extern char 	*NTEXT ();
+extern void	SELECT ();
+extern void 	DESELECT ();
+extern void 	RESET_COORD ();
+extern void 	DRAW_MOLECULES ();
+extern void	DRAW_FFT ();
+extern void 	DRAW_CROSS ();
+extern int	SHOW_CROSS ();
+extern WIND 	DRAW ();
+extern void 	SHOW ();
+

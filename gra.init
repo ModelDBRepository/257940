@@ -1,0 +1,75 @@
+/*definitions and types for windows functions */
+
+#include <stdio.h>
+#include <math.h>
+
+#include <string.h>
+#include <X11/StringDefs.h>
+#include <X11/Intrinsic.h>
+#include <X11/Xutil.h>
+#include <X11/Xlib.h>
+#include <X11/Shell.h>
+#include <X11/X.h>
+#include <X11/cursorfont.h>
+
+
+
+
+#define LEFT Button1
+#define MIDDLE Button2
+#define RIGHT Button3
+
+#define noir		0
+#define blanc		1
+#define	rouge		300
+#define	vert		301
+#define	bleu		302
+#define	jaune		303
+#define	violet		304
+#define	orange		305
+#define	magenta		306
+#define	ciel		307
+#define	gris		308
+#define	bleuclair	309
+#define	rose 		310
+#define	rougefonce	311
+#define	vertfonce	312
+#define	bleufonce	313
+#define	brun		314
+#define	marron		315
+
+enum EVENTT	{mouse, key, expose};
+
+typedef struct 	{
+		enum 	EVENTT flag;
+		int	 button;
+		char 	*key;
+		int 	xpos, ypos;
+		} EVENT;
+
+Window		CURRENTW;
+GC		CONTEXT;
+Display		*DISPLAY;
+int             SCRN;
+Colormap 	CMAP;
+
+Window  	main_window, mol_window, new_window, other_window, cortex_window, cross_window; 	
+Window 		weight_window, pv_window, vi_window, spike_window;
+
+int			*color_offset1;
+int			*color_offset2;
+int			NCOLORS1, NCOLORS2;
+extern Window 		OPEN_WINDOW ();
+extern enum BOOLEAN 	EQU ();
+extern	EVENT		GET_EVENT ();
+extern void		INIT_GRAPHICS ();
+extern void		LINE ();
+extern void 		CHOOSE_WINDOW ();
+extern void 		CLEAR ();
+extern void 		CIRCLE ();
+extern void 		FILLED_CIRCLE ();
+extern void		DRAW_POINT ();
+extern void 		CURVE ();
+extern void		SPIKES ();
+extern void		AXIS ();
+extern void 		ACTIVITY ();

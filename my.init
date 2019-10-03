@@ -1,0 +1,111 @@
+
+/********************************************************/
+/**** this file contains all personal definitions *******/
+/**** booleans, types and functions which are not *******/
+/**** provided in the library ***************************/
+/********************************************************/
+
+
+#define NMDA	0
+#define AMPA	1
+#define GABAA	2
+#define GABAB	3
+
+
+/**** types of neurons ****/
+enum BOOLEAN	{VRAI, FAUX};   /*booleans*/
+
+enum TYPES	{all, receptor, mitral, mitral2, PG, granule, pyr, inhib1, inhib2, ET, motor};	
+
+enum COMPS {soma, dend2, dend1, glom};
+
+enum LINK_TYPES {aff, local, lateral, central, extrin, intrin, fback, fforw, mod, bulb_pc, pc_bulb};
+
+
+int		MOL, REC, GLOM, PYRS;
+int		N_LINKS;
+enum BOOLEAN	CHANGE, FOURRIER, COUNT;
+enum BOOLEAN 	LEARN; 
+int		NODS, NCENTRALS;
+float 		DOFF;
+enum BOOLEAN	MEANS_POT;
+float 		muu; 
+int 		learnfrom, learntoo;
+float 		*saveweights;
+float 		AMIN, BPLUS;
+
+typedef struct {
+		int from, too;
+		float	*values;
+		float *outputs;
+		} ODORS;
+
+
+typedef struct {
+		float stim[5000];
+		} MOLS;
+
+typedef struct {
+		float *sensi;
+		} REC_MOL;
+                                              
+typedef struct {
+		float *weight;
+		int   *delay;
+		} LATS;
+
+
+typedef struct { 
+		int points;
+		float *fft;
+		float	max;
+		int	max_freq;
+		} FFT;
+
+typedef struct {
+		float *stepp;
+		} CONTEX;
+
+/**** two input vectors ***/
+
+float		PRE;
+FFT		*fft_proj; 
+FFT		*fft_in; 
+REC_MOL 	*recs;
+MOLS		*molecules;  
+ODORS		*odors;
+MOLS		*cortex;  
+CONTEX	 	*contex;                    
+float		*p_out;    
+float		*p_pot;  
+float		*v_pot, *v_out;
+float		*i_pot, *i_out;
+float 		*ccurve, *spectre, *phase;
+float 		*EF;
+float		*spik; 
+float		*wave;
+int 		fft_i1, fft_i2;
+int			HEIGHT, WIDTH;
+/*int		LEARN;*/
+int			learnfrom1, learntoo1, learnfrom2, learntoo2;
+float 		THRESH, THRESH2, muu;
+float 		*GUST;
+int			LL;
+int			NX, NY;
+float		RATEASS, RATEMCGC, RATEPCGC;
+float		FORGETASS, FORGETMCGC, FORGETPCGC;
+float 		WMM1, WMM2;
+float		*STIM;
+float 		OXT;
+
+extern FFT	 *DO_FFT ();
+extern LATS	 *MAKE_LATS ();
+extern float	TOT_PRE ();
+extern 	float 	VUM ();
+extern LATS 	*ZEROS ();
+extern LATS     *MAKE_NEIGHBORS ();
+extern LATS 	*RAN ();
+extern LATS     *MAKE_NEIGHBORS2 ();
+extern LATS     *FUNCTIONAL ();
+
+

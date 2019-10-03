@@ -1,0 +1,120 @@
+/*contains definitions and types to run network */
+
+
+#include "my.init"    /** personal definitions **/
+#include "lib.init"   /** library definitions and functions **/
+#include "gra.init"
+#include "draw.init"
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+#include <stdlib.h>
+
+                                       
+
+				
+
+/************neurons***********/
+/************one link**********/
+
+typedef struct	_link {
+			int			from_unit;
+			float			weight;
+			float			firstweight;
+			float			*signal;
+			int			delay;  
+			struct _link 		*next;
+			enum LINK_TYPES		type;
+			enum BOOLEAN 		reverse;
+			float 			reversal;
+			int			channel;
+			enum BOOLEAN		hebb;
+			float			learning_rate;
+			float 			max_weight;
+			float			delta_weight;
+			float			old_signal, old_help;
+			float			tau1;
+			float			tau2;
+			float 			gmax; 
+			int			nspikes; 
+			int			*spikes;
+			float 			*amps; 
+			float 			mod; 
+			enum COMPS		from_comp;
+			enum COMPS		too_comp;
+                	}   LINK;   
+
+
+typedef struct 
+			{
+
+			float 			nernst; 
+			float 			tau1, tau2;
+			enum BOOLEAN 		hebb, reverse;
+			float 			max_weight;
+			float 			nuu;
+			float 			gmax; 
+			}	CHANNEL; 
+
+
+
+/************update function****/
+
+typedef float (*FUNCTION) ();
+
+/*********one neuron*************/ 
+
+
+typedef struct {
+		enum TYPES 		type;   
+		char 			name[10];
+		FUNCTION		input_function;
+		FUNCTION		state_function;
+		FUNCTION		output_function;
+		float			inpar1, inpar2;		
+		float			stpar1, outpar1, outpar2;
+		float   		*state, *output;
+		float 			old_state; 
+		float 			*calcium;   
+		LINK			*links_to_unit;
+		int			x_coor, y_coor; 
+		int			couche;              
+		enum BOOLEAN 		selected; 
+		enum BOOLEAN		flag;
+		int 			layer;
+		int			ncomps;
+		float 			comps[5];
+		}  NEURON;
+
+                                
+
+
+/**********variables**********/
+
+int			N_STEPS;	/*number of steps*/
+float			ww;
+int			N_UNITS;	/*number of neurons*/
+NEURON			*units;       	/*neuron vector*/
+int			ialea;          /*random numbers*/
+double			alea;                           
+char			TEX[10];
+CHANNEL			channels[4];
+int			points;
+float 			DELTA;
+int			COUNT1;
+float 			aplus, aminus, tauplus, tauminus, threshold;
+float			*AVSM, *AVSG, *AVSP;
+float 			*MAV, *GAV, *PAV, *EAV, *RAV;
+float 			*POTSM, *POTSG, *POTSP;
+
+/*************functions**********/
+
+extern double		RANF ();  
+extern enum 		BOOLEAN EQU ();
+extern float 		GAUSSIENNE ();
+extern float		DEXP ();
+extern float 		COUNTSPIKES ();
+extern float 		VUM ();
+extern float 		*INTERSPIKE ();
+extern float 		SYNC_COUNT ();
+extern float 		*ALDS2 ();
