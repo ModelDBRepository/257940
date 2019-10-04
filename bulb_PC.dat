@@ -1,0 +1,19 @@
+Bulb_PC(prob/sigma/w/N/A/radius)
+
+0.2 2.0 4.0 0.0 1.0 5
+
+PC_BULB(prob/w/N/A)
+
+0.0 5.0 0.0 1.0 
+
+DEPRESS
+
+0.4
+
+LTP
+
+1.2
+
+
+
+
