@@ -1,5 +1,3 @@
-/*display functions */
-
 #include "gra.init"
 
 

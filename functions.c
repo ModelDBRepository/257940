@@ -1,5 +1,3 @@
-/* this file contains definitions of neural input, state and output functions */
-
 #include "cell.init"
 
 /*****************************************************************/
@@ -63,6 +61,37 @@ LINK	*link;
 #endif
 
 
+float GUST_INPUT (uni, step, in1, in2, dummi)
+int uni, step;
+float in1, in2, dummi;
+{
+float input_sum; 
+	input_sum = 0.0;
+	input_sum = SUM_INPUTS (uni, step, in1, in2, dummi);
+	input_sum += GUST[step];
+return (input_sum);
+}
+
+#if 1
+float ELECTRICAL (uni, step, dum, dumm, dummi)
+int uni, step; 
+float dummi, dum, dumm; 
+{
+	return (STIM[step]);
+	
+}
+#endif
+
+#if 0
+float ELECTRICAL (uni, step, dum, dumm, dummi)
+int uni, step; 
+float dummi, dum, dumm; 
+{
+	
+	return (contex[units[uni].couche].stepp[step]);
+	
+}
+#endif!
 float ELECTRICAL_IN (uni, step, in1, in2, dummi)
 int uni, step; 
 float dummi, in1, in2; 
@@ -91,6 +120,22 @@ float calcium;
 	return (input);
 }
 
+float ADAPT_AON (uni, step, in1, in2, dummi)
+int uni, step;
+float dummi, in1, in2;
+{
+float input;
+float calcium;
+	input = SUM_INPUTS (uni, step, in1, in2, dummi);
+	input += contex[units[uni].couche].stepp[step];
+	if (step > 0)
+		units[uni].calcium[step] = (1-exp(-DELTA/in1)) * 10*units[uni].output[step-1]  + units[uni].calcium[step-1]*exp(-DELTA/in1) ;
+	else
+		units[uni].calcium[step] = 0.0;
+	input -= in2 * units[uni].calcium[step];
+	return (input);
+}
+
 
 
 float ADAPT_ELECTRICAL (uni, step, in1, in2, dummi)
@@ -109,6 +154,62 @@ float calcium;
 	return (input);
 }
 
+
+	
+	
+
+float SAT_INPUTS (uni, dummy, down, up, dummi)
+int		uni, dummy;
+float	up, down, dummi;
+{
+int		l_number, del;
+float	input_sum, signal;          
+LINK	*link;
+	input_sum = 0.0;             
+	link = units[uni].links_to_unit;
+		while (link != NULL)
+			{                                      
+			del = link->delay;   
+			signal = link->signal[del-1];
+			if (signal >= up)
+				signal = up;
+			if (signal <= (float) down)
+				signal = (float) down;
+			input_sum += signal;
+			link = link->next;
+			}
+	return (input_sum); 
+}
+
+#if 0
+float PROJ_INPUTS (uni, dummy, in1, in2, dummi)
+int		uni, dummy;
+float	dummi, in1, in2;
+{
+int		l_number, del;
+float	input_sum, signal;          
+LINK	*link;
+	input_sum = 0.0;             
+	link = units[uni].links_to_unit;
+		while (link != NULL)
+			{
+			del = link->delay;
+			signal = link->signal[del-1];
+			if ((units[uni].type == proj) && (units[link->from_unit].type == proj))
+				{
+				if ((dummy > 2) && (units[uni].state[dummy-1] >= 0.0) && 
+				(units[uni].state[dummy-2] >= 0.0))					
+					input_sum += signal;  
+				}
+			else 
+				input_sum += signal;
+			link = link->next;
+			}
+	if (input_sum >= in2)
+		input_sum += in1 * dummi;
+	return (input_sum); 
+}
+#endif
 
 float LOOK_UP (uni, step, in1, in2, dummi)
 int uni, step; 
@@ -261,6 +362,20 @@ float help;
 	    }
                    
 	return (help);
+}
+
+float VUM_OUT (state, thresh, dummy)
+float *state, *thresh, *dummy;
+{
+  float help;
+  if (*state >= *thresh)
+    {
+      help = 1.0;
+      *state = 0.0;
+    }
+else
+  help = 0.0;
+  return (help);
 }
 
 

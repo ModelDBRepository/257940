@@ -1,4 +1,4 @@
-/*definitions and types needed for graphic functions */
+
 
 typedef struct 	{
 		int	from;

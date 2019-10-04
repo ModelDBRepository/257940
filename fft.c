@@ -1,5 +1,3 @@
-/* FFT and cross correlations */
-
 #include "cell.init"    
 
 

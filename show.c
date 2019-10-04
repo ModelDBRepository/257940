@@ -119,11 +119,11 @@ int unit;
       		unit++;
   	 	} /** endwhile (help < lasty .. **/
 	
-  	CURVE (x1,help, xmul, potmul*20, N_STEPS, POTSM);
+  	CURVE (x1,help, xmul, potmul*2, N_STEPS, POTSM);
 	help += 2*delta;
-	CURVE (x1,help, xmul, potmul*10, N_STEPS, POTSG);
+	CURVE (x1,help, xmul, potmul*1, N_STEPS, POTSG);
 	help += 2*delta;
-	CURVE (x1,help, xmul, potmul*10, N_STEPS, POTSP);
+	CURVE (x1,help, xmul, potmul*1, N_STEPS, POTSP);
 	 
 	
   	draw_result.too = unit;
@@ -132,7 +132,7 @@ int unit;
   	TEXT ("x : deselect all", 200, 10);
   	TEXT ("s : draw selected", 200, 25);
   	TEXT ("q : quit     u : scroll up  d : scroll down", 500, 10);
-  	TEXT ("m : m2  g : gr  p : pyr  b: pyr1 v : pyr2 i : inh1 e : inh2 ", 500, 25);  
+  	TEXT ("m : mitral  g : granule  p : pyramidal ", 500, 25);  
   	return (draw_result);
 }
 

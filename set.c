@@ -1,5 +1,3 @@
-/*creates the network*/
-
 #include "cell.init"
 
 #define dummi 0.0

@@ -1,5 +1,3 @@
-/*definitions and types for windows functions */
-
 #include <stdio.h>
 #include <math.h>
 

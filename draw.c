@@ -1,6 +1,3 @@
-
-/* display neural activities */
-
 #include "cell.init"
 
 

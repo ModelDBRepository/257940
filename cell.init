@@ -1,6 +1,3 @@
-/*contains definitions and types to run network */
-
-
 #include "my.init"    /** personal definitions **/
 #include "lib.init"   /** library definitions and functions **/
 #include "gra.init"

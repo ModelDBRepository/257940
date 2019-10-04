@@ -1,4 +1,4 @@
-/*input output functions */
+
 
 
 #include "cell.init"
@@ -47,6 +47,89 @@ char dummy[50];
 }
 
 
+#if 0
+void GET_ODORS ()
+{
+
+typedef struct 
+	{
+	int x, y;
+	float value;
+	} X;
+X *mol; 
+int i, o, m, from, too;
+EVENT maus;
+int steps;  
+int x, y, j;            
+float con;
+
+       if ((odors != NULL) && (NODS != 0))
+	  {
+	    for (m = 0; m < NODS; m++)
+		free (odors[m].values);
+           free (odors);
+	  }
+	if (mol_window == NULL)
+		mol_window = OPEN_WINDOW (0, 0,MOL*20, 200, blanc);
+	printf (" mols %d nodors .. \n", MOL);
+	scanf ("%d", &NODS);  
+
+	odors = (ODORS *) calloc (NODS, sizeof (ODORS));
+	for (m = 0; m < NODS; m++)
+		odors[m].values = (float *) calloc (MOL, sizeof (float));
+	mol = (X *) calloc (MOL, sizeof (X)); 
+	x = 10; y = 10;j = 0;
+	CHOOSE_WINDOW (mol_window);
+	CLEAR ();
+	for (;;)
+  		{
+	for (o = 0; o < NODS; o++, y+= 20)
+		{ 
+		maus = GET_EVENT ();
+                          
+		x = 10;
+		for (i = 0; i < MOL; i++, x+= 20)
+			{
+			CIRCLE (x, y, 10);
+			mol[i].x = x;
+			mol[i].y = y;
+			}            
+		printf (" odor %d from .. too .. concentration\n", o);
+		scanf ("%d %d %f", &from, &too, &con);
+		printf (" click left in active molecules, right when done\n");	 
+		maus.button = LEFT;
+		while (maus.button != RIGHT)
+			{
+			maus = GET_EVENT ();
+			if ((maus.flag == mouse) && (maus.button == LEFT))
+				{
+				for (i = 0; i < MOL; i++)
+					if ((maus.xpos <= mol[i].x + 10) && (maus.xpos >= mol[i].x -10) &&
+						(maus.ypos <= mol[i].y + 10) && (maus.ypos >= mol[i].y - 10))
+					{   
+					FILLED_CIRCLE (mol[i].x, mol[i].y, 10); 
+					mol[i].value = 1.0;
+					}
+				}
+			} 
+                odors[o].from = from;
+		odors[o].too = too;
+		for (i = 0; i < MOL; i++)
+			odors[o].values[i] = mol[i].value;
+		for (i = from; i < too; i++)
+			for (m = 0; m < MOL; m++)
+				molecules[m].stim[i] += con * mol[m].value;
+		for (i = 0; i < MOL; i++)
+			mol[i].value = 0.0;
+		}
+	break;
+      	}
+       	/*DESTROY_WINDOW (mol_window);*/
+
+	free (mol);   
+
+}
+#endif
 void SAVE_CONFIG ()
 {
 int 	unit, nlinks, in, sta, out;

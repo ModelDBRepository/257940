@@ -1,16 +1,14 @@
-/*display parameters */
-
 xmul		1
 outmul		10
 potmul		5
 delta		20
 
-stimululus	0
-receptors	0
-potential	0
+stimululus	1
+receptors	1
+potential	1
 output		1
 spikes		1
-pot+spikes	1
+pot+spikes	0
 
 mitralpot	1
 mitralout	1

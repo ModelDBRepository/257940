@@ -1,5 +1,3 @@
-/*window and graphic functions */
-
 #include "cell.init"
 void INIT_GRAPHICS ()
 {
