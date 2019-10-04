@@ -5,7 +5,8 @@
   This C code was contributed by C Linster.
   <p/>Example Use:<br/>
   ----------------<p/>
-  Build and run the executable: (on ubuntu 18.04 the command "sudo apt install libxt-dev" had to be executed to supply the X-library folders):<pre>
+  Build and run the executable: (X-library folders may have to be adjusted:
+on ubuntu 18.04 the command "sudo apt install libxt-dev" had to be executed to supply the X-library folders):<pre>
   make -f neuron.mak
   ./neuron.run
   </pre>
@@ -29,7 +30,6 @@ in null all N_STEPS 1000 N_UNITS 601
   <p/>After a short delay you should see a figure like this<p/>
   <img src="./screenshot.png" alt="screenshot" width="650">
 <p/>
-    <p/>(X-library folders may have to be adjusted)<p/>
 Program files (.c) : <br/>
 sim.c   functions to create neurons and synapses between neurons <br/>
 set.c   function to create a network of olfactory bulb sensory neurons, PG, ET, mitral and granule cells connected to a layer or cortical pyramidal cells <br/>
