@@ -10,25 +10,181 @@ on ubuntu 18.04 the command "sudo apt install libxt-dev" had to be executed to s
   make -f neuron.mak
   ./neuron.run
   </pre>
-  Select the options: 1 (set up new), 31 (odor stim), 1 (learn), 0 (don't forget)
-  <br/> So that your shell session might look like this:<pre>
-LinsterKelsch2019$ ./neuron.run 
- end of init graphics 
- 1. set up new 2. load config 3. exit
-1
- at end of bulb NUNITS 601 NLINKS 14476 
- Nunits 601 Nlinks 14476 
- 1. draw again  31. odor stim 32. electrical 21. same input 3. save pyrs 4. set up new 5.save mits 6. save grans 7. save averages  8. correlations 9. show weights 10. save_weigts 11. save time avs 13. exit
-31
- in run loop 
-in null all N_STEPS 1000 N_UNITS 601 
-0 dont 1 learn
-1
-0 dont forget 1 forget
-0
-  </pre>
-  <p/>After a short delay you should see a figure like this<p/>
-  <img src="./screenshot.png" alt="screenshot" width="650">
+<b>Linster and Kelsch Figure 2C and 3C</b><p/>
+
+Figure shows AON pyramidal cell simulations under two conditions
+(control and OXT modulation). OXT modulation decreases pyramidal cell
+spike rate adaptation and spiking threshold. For control simulations,
+use (in File bulb.dat; see below)
+
+  <p/>
+<pre>
+PYR:
+input_function	ADAPT_INPUT
+in_par1		100.0
+in_par2		0.2
+state_function	DECAY
+sta_par		10
+output_function	SPIKE
+out_par1	0.5
+out_par2	8.0 
+</pre>
+<p/>  Use ./neuron.run to run model. Choose 1. Set up new, 31. Odor stim,
+  0 don’t learn 0 don’t forget. Once you see the display panel, use
+  “p” in the graphics window to display only pyramidal cells. This
+displays activities similar to those depicted in Figure 2Ci.
+<p/><img src="./fig2c.png" width="800"><p/>
+Type
+  “x” into graphics window to unselect pyramidal cells, then “m” to
+display mitral cells as shown in Figure 3C.
+  <p/>
+  <img src="./fig3c.png" width="800">
+<br/>
+  Type “q” in display panel to get handle back for menu items. 
+Change parameters for pyramidal cells in bulb.dat 
+
+<p/>
+<pre>
+PYR:
+input_function	ADAPT_INPUT
+in_par1		100.0
+in_par2		0.0
+state_function	DECAY
+sta_par		10
+output_function	SPIKE
+out_par1	0.5
+out_par2	4.0
+</pre>
+<p/>
+Save the file, type 4 (set up new) to create a new network, then 31
+(odor stim) or 21 (same input) to run simulation. When graphics
+display, type “p” into graphics window to display pyramidal cells
+only. To see mitral cells , use “x” to unselect neurons and then “m”
+in the graphics window.
+
+  <p/>
+  <b>Figure 3 D and E, 4C and 5</b>
+<p/>
+  The file save.c has routines to run simulations with a number of
+  odors and to save the neural activities to perform statistics and
+  comparisons. SAVE2 for example compares responses to familiar and
+  novel odors, saves activity vectors and weight matrices and then
+  habituates to a familiar odor, and/or learns this familiar odor in
+  cortex, and save synaptic weights in certain intervals. After
+  learning familiar and novel odors are presented again and activities
+  saved. Then “forgetting” happens, a function in which synaptic
+  weights slowly decay back to their original values.
+
+<p/>
+  SAVE is set up to compute discrimination and detection indices by
+  comparing activities of different odor stimuli to each
+  other. SAVE_CONC computes responses to a given odor at a range of
+  concentrations for S/N computations.
+<p/>
+<pre>
+BULB
+
+MOLS		100
+RECS		100
+GLOMS		100
+neurs		1
+
+RECEPTORS:
+input_function	GET_MOLECULES
+in_par1		0.0
+in_par2		0.0
+state_function	LINEAR
+sta_par		0.0
+output_function	SPIKE
+out_par1	-0.01
+out_par2	1.0
+
+PG:
+input_function	SUM_INPUTS
+in_par1		0.0
+in_par2		0.0
+state_function	DECAY
+sta_par		2
+output_function	SPIKE
+out_par1	0.2
+out_par2	4.0
+
+ET
+input_function	SUM_INPUTS
+in_par1		-0.0
+in_par2		0.0
+state_function	DECAY
+sta_par		8
+output_function	SPIKE
+out_par1	1.0
+out_par2	4.0
+
+MITRAL
+input_function	SUM_INPUTS
+in_par1		-0.0
+in_par2		0.0
+state_function	DECAY
+sta_par		8
+output_function	SPIKE
+out_par1	-0.1
+out_par2	8.0
+
+GRANULE:
+input_function	SUM_INPUTS
+in_par1		-0.0
+in_par2		0.0
+state_function	DECAY
+sta_par		4
+output_function	SPIKE
+out_par1	2.0
+out_par2	4.0
+
+PYR:
+input_function	ADAPT_INPUT
+in_par1		100.0
+in_par2		0.2
+state_function	DECAY
+sta_par		10
+output_function	SPIKE
+out_par1	0.5
+out_par2	8.0
+
+AFFERENTS(w/d/N/A): 
+R_M	0.4  1 0.0  1.0
+R_PG	0.0 1 1 0.0  1.0
+R_ET	0.02 1 0.0  1.0
+
+LOCAL(w/d/N/A/A/B):
+M_PG	0.0  1	0.0 1.0 
+PG_M	0.01  1	1.0 0.0
+ET_PG 	0.0  1   0.0 1.0
+ET_M	0.1  1   0.0 1.0
+PG_ET   0.0 1   1.0 0.0
+
+BULB(w/d/prob/N/A):
+M_G	0.25 1 0.2 0.0 1.0
+G_M	0.25 1 0.0 0.98 0.02 
+G_G	0.05 1 1.0 1.0 0.0
+
+CENTRAL(w/d/prob/N/A):|
+M_P	0.3 1 0.2 0.0 1.0
+P_M	0.0 1 0.1 0.0 1.0
+P_G	0.2 1 0.2 0.0 1.0
+P_E 	0.1 1 0.2 0.0 1.0 
+P_P	0.0 1 0.25 0.0 1.0
+
+max1 	1.0
+max2	1.0
+
+RATEASS 	0.000 
+RATEMCGC 	0.001
+RATEPCGC	0.01
+
+FORGETASS 0
+FORGETMCGC 10
+FORGETPCGC 4500
+OXT 	1.0
+</pre>
 <p/>
 Program files (.c) : <br/>
 sim.c   functions to create neurons and synapses between neurons <br/>
@@ -56,4 +212,5 @@ neuron.mak    <br/>
 Create executable called neuron.run<br/>
 save.mak graph.mak
   <p/>
+20191009 readme edits from C Linster on how to run the model to create figures in the paper
 </html>
